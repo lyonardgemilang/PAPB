@@ -84,7 +84,7 @@ class ItemDetailsViewModel(
 }
 
 /*
-    data class ItemDetailsUiState menyimpan status UI untuk ItemDetailsScreen/
+    data class ItemDetailsUiState menyimpan status UI untuk ItemDetailsScreen
  */
 data class ItemDetailsUiState(
     val outOfStock: Boolean = true,
