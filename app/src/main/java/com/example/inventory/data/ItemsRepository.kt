@@ -18,12 +18,24 @@ package com.example.inventory.data
 
 import kotlinx.coroutines.flow.Flow
 
-/**
- * Repository that provides insert, update, delete, and retrieve of [Item] from a given data source.
+/*
+    ItemsRepository merupakan interface yang mengelola entitas Item
+    dalam aplikasi termasuk operasi CRUD. Repo ini membantu menjaga
+    pemisahan tanggung jawab karena bertindak sebagai layer
+    antara data dan layer lain dalam aplikasi.
  */
 interface ItemsRepository {
-    /**
-     * Retrieve all the items from the the given data source.
+    /*
+        getAllItemsStream merupakan fungsi untuk mendapatkan flow semua
+        item dari sumber data. Flow di sini digunakan agar aplikasi dapat
+        memantau perubahan data secara real time.
+
+        getItemStream merupakan fungsi untuk mendapatkan flow data item
+        sesuai id.
+
+        insertItem merupakan fungsi untuk menambahkan item baru ke sumber data.
+        deleteItem merupakan fungsi untuk menghapus item dari sumber data.
+        updateItem merupakan fungsi untuk memperbarui item pada sumber data.
      */
     fun getAllItemsStream(): Flow<List<Item>>
 

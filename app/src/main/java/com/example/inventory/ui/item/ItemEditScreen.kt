@@ -37,6 +37,10 @@ import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
 import kotlinx.coroutines.launch
 
+/*
+    ItemEditDestination merupakan objek yang mendefinisikan rute untuk layar
+    edit item
+ */
 object ItemEditDestination : NavigationDestination {
     override val route = "item_edit"
     override val titleRes = R.string.edit_item_title
@@ -44,6 +48,9 @@ object ItemEditDestination : NavigationDestination {
     val routeWithArgs = "$route/{$itemIdArg}"
 }
 
+/*
+    ItemEditScreen merupakan fungsi utama untuk layar edit item.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemEditScreen(

@@ -33,6 +33,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 
+/*
+    ItemDaoTest merupakan kelas testing berbasis JUnit untuk ItemDao yang berfungsi
+    untuk memverifikasi CRUD di Room.
+
+    Anotasi @RunWith menunjukkan bahwa testing dijalankan dengan JUnit
+ */
 @RunWith(AndroidJUnit4::class)
 class ItemDaoTest {
 
@@ -41,6 +47,10 @@ class ItemDaoTest {
     private val item1 = Item(1, "Apples", 10.0, 20)
     private val item2 = Item(2, "Bananas", 15.0, 97)
 
+    /*
+        Anotasi @Before menandakan bahwa createDb ini dijalankan sebelum setiap testing.
+        Fungsi ini membangun database in-memory untuk testing.
+     */
     @Before
     fun createDb() {
         val context: Context = ApplicationProvider.getApplicationContext()
@@ -53,12 +63,20 @@ class ItemDaoTest {
         itemDao = inventoryDatabase.itemDao()
     }
 
+    /*
+        Anotasi @After menandakan bahwa closeDb akan dijalnkan setelah setiap testing.
+        Fungsi ini menutup database
+     */
     @After
     @Throws(IOException::class)
     fun closeDb() {
         inventoryDatabase.close()
     }
 
+    /*
+        daoInsert_insertsItemIntoDB menguji bahwa insert di ItemDao dapat menyimpan
+        item ke database.
+     */
     @Test
     @Throws(Exception::class)
     fun daoInsert_insertsItemIntoDB() = runBlocking {
@@ -67,6 +85,10 @@ class ItemDaoTest {
         assertEquals(allItems[0], item1)
     }
 
+    /*
+        daoGetAllItems_returnsAllItemsFromDB menguji bahwa metode getAllItems mengembalikan
+        item dengan ID tertentu.
+     */
     @Test
     @Throws(Exception::class)
     fun daoGetAllItems_returnsAllItemsFromDB() = runBlocking {
@@ -76,7 +98,9 @@ class ItemDaoTest {
         assertEquals(allItems[1], item2)
     }
 
-
+    /*
+        daoGetItem_returnsItemFromDB menguji bahwa getItem mengembalikan item dengan id tertentu
+     */
     @Test
     @Throws(Exception::class)
     fun daoGetItem_returnsItemFromDB() = runBlocking {
@@ -85,6 +109,9 @@ class ItemDaoTest {
         assertEquals(item.first(), item1)
     }
 
+    /*
+        daoDeleteItems_deletesAllItemsFromDB menguji bahwa delete menghapus item dari database
+     */
     @Test
     @Throws(Exception::class)
     fun daoDeleteItems_deletesAllItemsFromDB() = runBlocking {
@@ -95,6 +122,9 @@ class ItemDaoTest {
         assertTrue(allItems.isEmpty())
     }
 
+    /*
+        daoUpdateItems_updatesItemsInDB menguji bahwa update memperbarui data item pada database
+     */
     @Test
     @Throws(Exception::class)
     fun daoUpdateItems_updatesItemsInDB() = runBlocking {
@@ -107,10 +137,16 @@ class ItemDaoTest {
         assertEquals(allItems[1], Item(2, "Bananas", 5.0, 50))
     }
 
+    /*
+        addOneItemtoDb menambahkan item1 ke database
+     */
     private suspend fun addOneItemToDb() {
         itemDao.insert(item1)
     }
 
+    /*
+        addTwoItemsToDb menambahkan item1 dan item2 ke database
+     */
     private suspend fun addTwoItemsToDb() {
         itemDao.insert(item1)
         itemDao.insert(item2)

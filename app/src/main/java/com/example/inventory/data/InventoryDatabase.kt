@@ -21,26 +21,39 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-/**
- * Database class with a singleton Instance object.
+/*
+    Anotasi @Database menandakan bahwa kelas InventoryData merupakan database Room.
+    Di dalam fungsi ini juga didefinisikan entitities beserta version. Entities yang digunakan adalah
+    Item dan versionnya adalah 1. Version disini berguna untuk mengelola migrasi data.
  */
 @Database(entities = [Item::class], version = 1, exportSchema = false)
 abstract class InventoryDatabase : RoomDatabase() {
 
+    /*
+        Fungsi abstrak itemDao() berfungsi untuk mendefinisikan akses ke objek DAO untuk Item.
+        Room akan menghasilkan implementasi dari ItemDao yang menyediakan fungsi-fungsi seperti CRUD.
+     */
     abstract fun itemDao(): ItemDao
 
+    /*
+        Objek companion di sini digunakan untuk mengimplementasikan singleton, yang memastikan bahwa
+        hanya ada satu instance yaitu InventoryDatabase pada seluruh aplikasi/
+     */
     companion object {
         @Volatile
         private var Instance: InventoryDatabase? = null
-
+        /*
+            Fungsi getDatabase befungsi untuk mengakses atau membuat instance InventoryDatabase
+            Jika instance sudah ada, maka metode ini akan mengembalikan instance berikut, apabila
+            masih null, maka instance baru akan dibuat.
+         */
         fun getDatabase(context: Context): InventoryDatabase {
             // if the Instance is not null, return it, otherwise create a new database instance.
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(context, InventoryDatabase::class.java, "item_database")
-                    /**
-                     * Setting this option in your app's database builder means that Room
-                     * permanently deletes all data from the tables in your database when it
-                     * attempts to perform a migration with no defined migration path.
+                    /*
+                        Opsi fallbackToDesctructiveMigration merupakan opsi untuk menghapus seluruh data
+                        apabila migrasi terjadi tanpa rute migrasi yang didefinisikan.
                      */
                     .fallbackToDestructiveMigration()
                     .build()

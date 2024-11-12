@@ -66,6 +66,10 @@ import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
 import kotlinx.coroutines.launch
 
+/*
+    ItemDetailsDestination merupakan objek yang mewakili
+    rute untuk layar detail item.
+ */
 object ItemDetailsDestination : NavigationDestination {
     override val route = "item_details"
     override val titleRes = R.string.item_detail_title
@@ -73,6 +77,10 @@ object ItemDetailsDestination : NavigationDestination {
     val routeWithArgs = "$route/{$itemIdArg}"
 }
 
+/*
+    ItemDetailsScreen merupakan fungsi utama untuk layar detail
+    item.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemDetailsScreen(
@@ -133,6 +141,10 @@ fun ItemDetailsScreen(
     }
 }
 
+/*
+    ItemDetailsBody merupakan fungsi yang menampilkan detail item
+    beserta tombol untuk menjual dan menghapus item
+ */
 @Composable
 private fun ItemDetailsBody(
     itemDetailsUiState: ItemDetailsUiState,
@@ -176,7 +188,10 @@ private fun ItemDetailsBody(
     }
 }
 
-
+/*
+    ItemDetails merupakan fungsi yang menampilkan detail
+    item dalam bentuk card
+ */
 @Composable
 fun ItemDetails(
     item: Item, modifier: Modifier = Modifier
@@ -228,6 +243,10 @@ fun ItemDetails(
     }
 }
 
+/*
+    ItemDetailsRow merupakan fungsi yang menampilkan baris informasi
+    detail Item.
+ */
 @Composable
 private fun ItemDetailsRow(
     @StringRes labelResID: Int, itemDetail: String, modifier: Modifier = Modifier
@@ -239,6 +258,10 @@ private fun ItemDetailsRow(
     }
 }
 
+/*
+    DeleteConfirmationDialog merupakan fungsi yang menampilkan dialog
+    konfirmasi untuk penghapusan item.
+ */
 @Composable
 private fun DeleteConfirmationDialog(
     onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit, modifier: Modifier = Modifier

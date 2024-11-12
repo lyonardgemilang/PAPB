@@ -20,10 +20,16 @@ import android.app.Application
 import com.example.inventory.data.AppContainer
 import com.example.inventory.data.AppDataContainer
 
+/*
+    InventoryApplication merupakan subclass dari Application yang berfungsi
+    untuk mengelola status aplikasi.
+ */
 class InventoryApplication : Application() {
 
-    /**
-     * AppContainer instance used by the rest of classes to obtain dependencies
+    /*
+        container merupakan instance dari AppContainer yang berfungsi sebagai
+        wadah untuk mengelola dependensi yang digunakan oleh berbagai kelas di
+        aplikasi. Instance ini diinisialisasi dalam onCreate.
      */
     lateinit var container: AppContainer
 

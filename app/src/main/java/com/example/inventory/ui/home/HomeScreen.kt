@@ -63,13 +63,18 @@ import com.example.inventory.ui.item.formatedPrice
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
 
+/*
+    HomeDestination merupakan objek yang mewakili layar homepage aplikasi
+    route merupakan navigasi untuk layar ini dan titleRes merupakan
+    judul aplikasi di layar ini.
+ */
 object HomeDestination : NavigationDestination {
     override val route = "home"
     override val titleRes = R.string.app_name
 }
 
-/**
- * Entry route for Home screen
+/*
+    HomeScreen merupakan fungsi utama untuk layar beranda
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -117,6 +122,9 @@ fun HomeScreen(
     }
 }
 
+/*
+    HomeBody merupakan fungsi yang menampilkan isi utama layar
+ */
 @Composable
 private fun HomeBody(
     itemList: List<Item>,
@@ -146,6 +154,9 @@ private fun HomeBody(
     }
 }
 
+/*
+    InventoryList menampilkan daftar item dalam bentuk LazyColumn
+ */
 @Composable
 private fun InventoryList(
     itemList: List<Item>,
@@ -166,6 +177,9 @@ private fun InventoryList(
     }
 }
 
+/*
+    InventoryItem menampilkan detail (nama, harga, dan kuantitas) item dalam bentuk card
+ */
 @Composable
 private fun InventoryItem(
     item: Item, modifier: Modifier = Modifier

@@ -32,8 +32,9 @@ import com.example.inventory.ui.item.ItemEditScreen
 import com.example.inventory.ui.item.ItemEntryDestination
 import com.example.inventory.ui.item.ItemEntryScreen
 
-/**
- * Provides Navigation graph for the application.
+/*
+    InventoryNavHost menyediakan navigasi utama untuk aplikasi
+    navController mengelola navigasi antar layar.
  */
 @Composable
 fun InventoryNavHost(
@@ -45,6 +46,9 @@ fun InventoryNavHost(
         startDestination = HomeDestination.route,
         modifier = modifier
     ) {
+        /*
+            Destinasi Homepage
+         */
         composable(route = HomeDestination.route) {
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(ItemEntryDestination.route) },
@@ -53,12 +57,18 @@ fun InventoryNavHost(
                 }
             )
         }
+        /*
+            Destinasi tambah item
+         */
         composable(route = ItemEntryDestination.route) {
             ItemEntryScreen(
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() }
             )
         }
+        /*
+            Destinasi detail item
+         */
         composable(
             route = ItemDetailsDestination.routeWithArgs,
             arguments = listOf(navArgument(ItemDetailsDestination.itemIdArg) {
@@ -70,6 +80,9 @@ fun InventoryNavHost(
                 navigateBack = { navController.navigateUp() }
             )
         }
+        /*
+            Destinasi edit item
+         */
         composable(
             route = ItemEditDestination.routeWithArgs,
             arguments = listOf(navArgument(ItemEditDestination.itemIdArg) {

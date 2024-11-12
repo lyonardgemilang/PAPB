@@ -27,8 +27,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-/**
- * ViewModel to retrieve, update and delete an item from the [ItemsRepository]'s data source.
+/*
+    ItemDetailsViewMOdel merupakan ViewModel yang mengambil, mengupdate
+    dan menghapus data item dari ItemsRepository.
  */
 class ItemDetailsViewModel(
     savedStateHandle: SavedStateHandle,
@@ -37,9 +38,13 @@ class ItemDetailsViewModel(
 
     private val itemId: Int = checkNotNull(savedStateHandle[ItemDetailsDestination.itemIdArg])
 
-    /**
-     * Holds the item details ui state. The data is retrieved from [ItemsRepository] and mapped to
-     * the UI state.
+    /*
+        uiState merupakan Stateflow yang menyimpan status UI untuk layar item
+        detail item. Data item diambil dari itemsRepository.getItemStream(itemId)
+        yang mengembalikan flow item. Data yang diteruskan hanyalah data yang tidak null.
+        map digunakan untuk memetakan item menjadi ItemDetailsUiState, yang berisi informasi
+        apakah stok habis dan juga detail item.
+        stateIn mengonversi flow data menjadi StateFlow.
      */
     val uiState: StateFlow<ItemDetailsUiState> =
         itemsRepository.getItemStream(itemId)
@@ -52,8 +57,10 @@ class ItemDetailsViewModel(
                 initialValue = ItemDetailsUiState()
             )
 
-    /**
-     * Reduces the item quantity by one and update the [ItemsRepository]'s data source.
+    /*
+        reduceQuantitiyByOne merupakan fungsi untuk mengurangi kuantitas item
+        sebesar satu. Fungsi ini dijalankan dalam viewModelScope agar memastikan
+        ekseskusi asinkronus.
      */
     fun reduceQuantityByOne() {
         viewModelScope.launch {
@@ -64,8 +71,8 @@ class ItemDetailsViewModel(
         }
     }
 
-    /**
-     * Deletes the item from the [ItemsRepository]'s data source.
+    /*
+        deleteItem merupakan fungsi untuk menghapus item dari ItemsRepository
      */
     suspend fun deleteItem() {
         itemsRepository.deleteItem(uiState.value.itemDetails.toItem())
@@ -76,8 +83,8 @@ class ItemDetailsViewModel(
     }
 }
 
-/**
- * UI state for ItemDetailsScreen
+/*
+    data class ItemDetailsUiState menyimpan status UI untuk ItemDetailsScreen/
  */
 data class ItemDetailsUiState(
     val outOfStock: Boolean = true,

@@ -50,11 +50,17 @@ import kotlinx.coroutines.launch
 import java.util.Currency
 import java.util.Locale
 
+/*
+    ItemEntryDestination merupakan objek yang mendefinisikan rute untuk layar tambah item.
+ */
 object ItemEntryDestination : NavigationDestination {
     override val route = "item_entry"
     override val titleRes = R.string.item_entry_title
 }
 
+/*
+    ItemEntryScreen merupakan fungsi utama untuk layar tambah item.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemEntryScreen(
@@ -98,6 +104,10 @@ fun ItemEntryScreen(
     }
 }
 
+/*
+    ItemEntryBody merupakan bagian utama dari layar yang menampilkan form
+    entri item
+ */
 @Composable
 fun ItemEntryBody(
     itemUiState: ItemUiState,
@@ -125,6 +135,9 @@ fun ItemEntryBody(
     }
 }
 
+/*
+    ItemInputForm merupakan form untuk mengisi nama, harga, dan kuantitas item.
+ */
 @Composable
 fun ItemInputForm(
     itemDetails: ItemDetails,

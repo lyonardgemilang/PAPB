@@ -25,8 +25,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-/**
- * ViewModel to retrieve all items in the Room database.
+/*
+    HomeViewModel merupakan ViewModel yang mengambil semua item dari Room dan
+    mengelola UI layar home page
  */
 class HomeViewModel(itemsRepository: ItemsRepository) : ViewModel() {
 
@@ -47,7 +48,8 @@ class HomeViewModel(itemsRepository: ItemsRepository) : ViewModel() {
     }
 }
 
-/**
- * Ui State for HomeScreen
+/*
+    HomeUiState merupakan data class yang mewakili status UI untuk
+    HomeScreen.
  */
 data class HomeUiState(val itemList: List<Item> = listOf())
